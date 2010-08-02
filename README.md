@@ -10,6 +10,8 @@ requires it the original book file (name.azw) and your Kindle serial number.
  * Allow a friend to borrow a book you are no longer reading (if this falls
    under fair use and is legal where you live)
 
+![Screenshot](http://github.com/danielgtaylor/kindledecrypt/raw/master/screenshot.png)
+
 Pre-Built Binaries
 ------------------
 The following pre-built binaries are available and kept up to date with the
