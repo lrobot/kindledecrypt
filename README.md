@@ -10,6 +10,13 @@ requires it the original book file (name.azw) and your Kindle serial number.
  * Allow a friend to borrow a book you are no longer reading (if this falls
    under fair use and is legal where you live)
 
+Pre-Built Binaries
+------------------
+The following pre-built binaries are available and kept up to date with the
+latest changes:
+
+ * [Microsoft Windows](http://programmer-art.org/dropbox/kindledecrypt-win32.exe)
+
 Dependencies
 ------------
 The Kindle Book Decrypter depends on the following:
