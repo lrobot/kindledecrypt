@@ -10,14 +10,36 @@
 
 import mobidedrm
 import multiprocessing
+import os
+import shutil
+import tempfile
 import time
+import topaz
 
 def _process(infile, outfile, pid, error):
     try:
-        data_file = open(infile, "rb").read()
-        strippedFile = mobidedrm.DrmStripper(data_file, pid)
-        file(outfile, 'wb').write(strippedFile.getResult())
-    except mobidedrm.DrmException, e:
+        if outfile.endswith(".mobi"):
+            # Mobi file
+            data_file = open(infile, "rb").read()
+            strippedFile = mobidedrm.DrmStripper(data_file, pid)
+            file(outfile, 'wb').write(strippedFile.getResult())
+        else:
+            # Topaz file
+            print pid
+            tmp = tempfile.mkdtemp()
+            args = ['./cmbtc.py', '-v', '-p', pid[:8], '-d', '-o', tmp, infile]
+            topaz.cmbtc.main(argv=args)
+            topaz.gensvg.main(['./gensvg.py', tmp])
+            topaz.genhtml.main(['./genhtml.py', tmp])
+            
+            if not os.path.exists(outfile):
+                os.mkdir(outfile)
+                
+            for filename in ["img", "style.css", "book.html"]:
+                shutil.move(os.path.join(tmp, filename), os.path.join(outfile, filename))
+            
+            shutil.rmtree(tmp)
+    except Exception, e:
         error.value = str(e)
 
 def decrypt(infile, outfile, pid):

@@ -32,16 +32,17 @@
 """
 
 __author__ = "Daniel G. Taylor"
-__version__ = 1.0
+__version__ = 1.1
 
 import ConfigParser
-import mobidedrm
 import optparse
 import os
 import sys
 import wx
 
+import mobidedrm
 import process
+import topaz
 
 CONFIG = os.path.expanduser("~/.mobidedrmwx.cfg")
 
@@ -78,7 +79,7 @@ class MobiDeDrmApp(wx.App):
         font.SetPointSize(8)
         self.serial_help.SetFont(font)
         self.input_label = wx.StaticText(self.panel, label="Book:")
-        self.input = wx.FilePickerCtrl(self.panel, wildcard="Kindle Books|*.azw;*.mobi|All Files|*.*")
+        self.input = wx.FilePickerCtrl(self.panel, wildcard="Kindle Books|*.azw;*.mobi;*.prc;*.azw1|All Files|*.*")
         self.button = wx.Button(self.panel, label="Decrypt")
         
         self.grid.Add(self.serial_label, (0, 0), flag=wx.ALIGN_CENTER_VERTICAL | wx.ALL)
@@ -129,7 +130,15 @@ class MobiDeDrmApp(wx.App):
             error_dialog.Destroy()
             return
         
-        outfile = os.path.splitext(infile)[0] + ".mobi"
+        # Which type of book is this?
+        ext = ""
+        try:
+            topaz.cmbtc.bookFile = topaz.cmbtc.openBook(infile)
+            topaz.cmbtc.parseTopazHeader()
+        except cmbtc.CMBDTCFatal:
+            ext = ".mobi"
+        
+        outfile = os.path.splitext(infile)[0] + "-decrypted" + ext
         pid = mobidedrm.getPid(self.serial.GetValue())
         dialog = wx.ProgressDialog("Progress", "Decrypting...")
         dialog.Pulse()
