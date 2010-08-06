@@ -16,6 +16,8 @@ import tempfile
 import time
 import topaz
 
+multiprocessing.freeze_support()
+
 def _process(infile, outfile, pid, error):
     try:
         if outfile.endswith(".mobi"):
