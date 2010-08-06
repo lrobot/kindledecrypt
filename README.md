@@ -19,6 +19,7 @@ The following pre-built binaries are available and kept up to date with the
 latest changes:
 
  * [Microsoft Windows](http://programmer-art.org/dropbox/kindledecrypt-1.1-win32.exe)
+ * [Mac OS X](http://programmer-art.org/dropbox/kindledecrypt-1.1-macosx.zip)
 
 Dependencies
 ------------
