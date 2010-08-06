@@ -135,7 +135,7 @@ class MobiDeDrmApp(wx.App):
         try:
             topaz.cmbtc.bookFile = topaz.cmbtc.openBook(infile)
             topaz.cmbtc.parseTopazHeader()
-        except cmbtc.CMBDTCFatal:
+        except topaz.cmbtc.CMBDTCFatal:
             ext = ".mobi"
         
         outfile = os.path.splitext(infile)[0] + "-decrypted" + ext
