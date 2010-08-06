@@ -25,7 +25,6 @@ def _process(infile, outfile, pid, error):
             file(outfile, 'wb').write(strippedFile.getResult())
         else:
             # Topaz file
-            print pid
             tmp = tempfile.mkdtemp()
             args = ['./cmbtc.py', '-v', '-p', pid[:8], '-d', '-o', tmp, infile]
             topaz.cmbtc.main(argv=args)
