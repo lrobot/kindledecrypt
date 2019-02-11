@@ -11,7 +11,7 @@ requires it the original book file and your Kindle serial number.
    under fair use and is legal where you live)
  * Supports Mobipocket and Topaz book formats (azw, mobi, prc, azw1, tpz)
 
-![Screenshot](http://github.com/danielgtaylor/kindledecrypt/raw/master/screenshot.png)
+![Screenshot](screenshot.png)
 
 Pre-Built Binaries
 ------------------
